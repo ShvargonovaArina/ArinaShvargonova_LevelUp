@@ -16,10 +16,39 @@
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
         <checkstyle.version>10.3.3</checkstyle.version>
         <maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
+        <junit-platform-suite-engine.version>1.9.2</junit-platform-suite-engine.version>
 
         <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
-
     </properties>
+
+    <profiles>
+        <profile>
+            <id>negative_suite</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <group.name>negative</group.name>
+            </properties>
+
+        </profile>
+
+        <profile>
+            <id>positive_suite</id>
+            <properties>
+                <group.name>positive</group.name>
+
+            </properties>
+        </profile>
+
+        <profile>
+            <id>all_suite</id>
+            <properties>
+                <group.name>all</group.name>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -30,7 +59,7 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-engine</artifactId>
-            <version>1.9.2</version>
+            <version>${junit-platform-suite-engine.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -74,9 +103,8 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven-failsafe-plugin.version}</version>
                 <configuration>
-                    <test>ru.levelp.at.homework2.suites.NegativeSuite</test>
+                    <groups>${group.name}</groups>
                 </configuration>
-
                 <executions>
                     <execution>
                         <id>integration-test</id>
