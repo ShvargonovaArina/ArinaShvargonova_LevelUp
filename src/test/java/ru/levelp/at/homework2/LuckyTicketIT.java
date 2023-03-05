@@ -28,13 +28,13 @@ public class LuckyTicketIT {
     @MethodSource("ru.levelp.at.homework2.LuckyTicketDataProvider#lengthLessThanSixDataProvider")
     @Tag (TagNames.NEGATIVE_TAG_NAME)
     void ticketLengthLessThan6(String ticketNumber) {
-        Assertions.assertFalse(ticketIsLucky(ticketNumber));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> ticketIsLucky(ticketNumber));
     }
 
     @ParameterizedTest
     @MethodSource("ru.levelp.at.homework2.LuckyTicketDataProvider#lengthMoreThanSixDataProvider")
     @Tag (TagNames.NEGATIVE_TAG_NAME)
     void ticketLengthMoreThan6(String ticketNumber) {
-        Assertions.assertFalse(ticketIsLucky(ticketNumber));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> ticketIsLucky(ticketNumber));
     }
 }
