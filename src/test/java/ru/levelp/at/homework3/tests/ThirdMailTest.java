@@ -1,32 +1,16 @@
-package ru.levelp.at.homework3;
+package ru.levelp.at.homework3.tests;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.time.Duration;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.levelp.at.homework3.Main;
+import ru.levelp.at.homework3.suites.TagName;
 
-class ThirdMailTest {
-    public static final String MAIL_URL = "https://mail.ru/";
-    private WebDriver driver;
-    private WebDriverWait wait;
-
-    @BeforeEach
-    void setUp() {
-        driver = new ChromeDriver();
-        driver.navigate().to(MAIL_URL);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        driver.manage().window().setSize(new Dimension(1920, 1080));
-    }
+public class ThirdMailTest extends Main {
 
     @Test
     @Tag(TagName.SUITE_TAG_NAME)
@@ -119,10 +103,5 @@ class ThirdMailTest {
                 By.xpath("//*[@data-testid = 'whiteline-account-exit']")
         )).click(); //Нажатие на кнопку выхода
         assertThat(title).isEqualTo("Mail.ru: почта, поиск в интернете, новости, игры"); //Проверка логаута
-    }
-
-    @AfterEach
-    void tearDown() {
-        driver.quit();
     }
 }
