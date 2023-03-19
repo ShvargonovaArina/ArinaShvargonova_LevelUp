@@ -1,15 +1,16 @@
-package ru.levelp.at.homework4.properties;
+package ru.levelp.at.homework4.base;
 
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Properties;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public abstract class Properties {
-    protected static final String login = "my.first.test.account";
-    protected static final String password = "my.first.password";
+public abstract class BaseTest {
+    protected Properties properties;
     protected static final String recipientMail = "my.first.test.account@yandex.ru";
     protected static final String personalMail = "my.first.test.account@mail.ru";
     protected static final String testAccount = "Test Account";
@@ -24,6 +25,12 @@ public abstract class Properties {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         driver.manage().window().maximize();
+        properties = new Properties();
+        try {
+            properties.load(this.getClass().getResourceAsStream("/ru/levelp/at/homework4/users.properties"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @AfterEach
