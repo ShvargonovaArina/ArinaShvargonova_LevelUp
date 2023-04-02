@@ -1,15 +1,14 @@
-package ru.levelp.at.homework4.pages;
+package ru.levelp.at.homework7.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import ru.levelp.at.homework4.inheritance.BasePage;
 
-public class SentPage extends BasePage {
+public class DraftsPage extends BasePage {
 
-    public SentPage(WebDriver driver) {
-
+    public DraftsPage(WebDriver driver) {
         super(driver);
     }
 
@@ -25,6 +24,12 @@ public class SentPage extends BasePage {
             + " llc_new llc_new-selection js-letter-list-item js-tooltip-direction_letter-bottom']"
             + "/div/div/div/span/div/*[@class = 'll-sp__normal']")
     private WebElement bodyLastLetter;
+    @FindBy(xpath = "//*[@class = 'button2__ico']")
+    private WebElement closeFoldedDraftButton;
+    @FindBy(xpath = "//*[@data-test-id = 'send']")
+    private WebElement sendButton;
+    @FindBy(xpath = "//*[@title = 'Закрыть']")
+    private WebElement confirmationWindowCloseButton;
 
     public String getAddressMailLastLetterText() {
         return wait.until(ExpectedConditions.elementToBeClickable(addressMailLastLetter)).getText();
@@ -34,11 +39,27 @@ public class SentPage extends BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(subjectLastLetter)).getText();
     }
 
-    public String getBodyLastLetterText() {
-        return wait.until(ExpectedConditions.elementToBeClickable(bodyLastLetter)).getText();
+    public void waitForPageLoaded() {
+        super.waitForPageLoaded("Черновики");
     }
 
-    public void waitForPageLoaded() {
-        super.waitForPageLoaded("Отправленные");
+    public String getBodyLastLetterText() {
+        return getText(bodyLastLetter);
+    }
+
+    public void openLastDraft() {
+        click(bodyLastLetter);
+    }
+
+    public void clickSendButton() {
+        click(sendButton);
+    }
+
+    public void clickCloseFoldedDraftButton() {
+        click(closeFoldedDraftButton);
+    }
+
+    public void clickConfirmationWindowCloseButton() {
+        click(confirmationWindowCloseButton);
     }
 }

@@ -1,14 +1,16 @@
-package ru.levelp.at.homework4.pages;
+package ru.levelp.at.homework7.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import ru.levelp.at.homework4.inheritance.BasePage;
 
 public class MainPage extends BasePage {
-    @FindBy(xpath = "//span[@class = 'ph-project__user-name svelte-1hiqrvn']")
-    private WebElement userDropdown;
+    @FindBy(xpath = "//img[@class = 'ph-avatar-img svelte-dfhuqc']")
+    private WebElement menuDropdown;
+    @FindBy(xpath = "//div[@class = 'ph-desc svelte-1q09i9a']")
+    private WebElement userAccount;
     @FindBy(xpath = "//*[@data-testid = 'whiteline-account-exit']")
     private WebElement exitButton;
 
@@ -28,16 +30,18 @@ public class MainPage extends BasePage {
         super(driver);
     }
 
-    public String getUserDropdownText() {
-        return wait.until(ExpectedConditions.elementToBeClickable(userDropdown)).getText();
+    public String getAccountName() {
+        return wait.until(ExpectedConditions.elementToBeClickable(userAccount)).getText();
     }
 
+    @Step("Открываем окно создания нового письма")
     public void clickNewLetterButton() {
         click(newLetterButton);
     }
 
-    public void clickUserDropdown() {
-        click(userDropdown);
+    @Step("Раскрываем меню")
+    public void clickMenuDropdown() {
+        click(menuDropdown);
     }
 
     public void clickExitButton() {

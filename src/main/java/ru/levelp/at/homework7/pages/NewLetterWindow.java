@@ -1,10 +1,9 @@
-package ru.levelp.at.homework4.pages;
+package ru.levelp.at.homework7.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import ru.levelp.at.homework4.inheritance.BasePage;
 
 public class NewLetterWindow extends BasePage {
     @FindBy(xpath = "//input[@class = 'container--H9L5q size_s--3_M-_']")
@@ -24,26 +23,32 @@ public class NewLetterWindow extends BasePage {
         super(driver);
     }
 
+    @Step("Заполняем получателя письма")
     public void fillRecipientMailField(final String recipientMail) {
         sendKeys(recipientMailField, recipientMail);
     }
 
+    @Step("Заполняем тему письма")
     public void fillSubjectLetterField(final String subjectLetter) {
         sendKeys(subjectLetterField, subjectLetter);
     }
 
+    @Step("Заполняем тело письма")
     public void fillBodyLetterField(final String bodyLetter) {
         sendKeys(bodyLetterField, bodyLetter);
     }
 
+    @Step("Нажимаем кнопку сохранения")
     public void clickSaveButton() {
         click(saveButton);
     }
 
+    @Step("Нажимаем кнопку отправки")
     public void clickSendButton() {
         click(sendButton);
     }
 
+    @Step("Нажимаем кнопку закрытия окна")
     public void clickCloseWindowButton() {
         click(closeWindowButton);
     }

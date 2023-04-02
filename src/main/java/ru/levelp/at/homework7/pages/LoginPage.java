@@ -1,9 +1,11 @@
-package ru.levelp.at.homework4.pages;
+package ru.levelp.at.homework7.pages;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ru.levelp.at.homework4.inheritance.BasePage;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
     private static final String MAIL_URL = "https://mail.ru/";
@@ -32,6 +34,11 @@ public class LoginPage extends BasePage {
         driver.switchTo().frame(loginFrame);
     }
 
+    @Step("Заполняем поле 'Логин'")
+    public void fillLoginField(final String login) {
+        sendKeys(loginField, login);
+    }
+
     public void clickFirstEnterButton() {
         click(firstEnterButton);
     }
@@ -40,16 +47,14 @@ public class LoginPage extends BasePage {
         click(secondEnterButton);
     }
 
-    public void clickThirdEnterButton() {
-        click(thirdEnterButton);
-    }
-
-    public void fillLoginField(final String login) {
-        sendKeys(loginField, login);
-    }
-
+    @Step("Заполняем поле 'Пароль'")
     public void fillPasswordField(final String password) {
         sendKeys(passwordField, password);
+    }
+
+    @Step("Нажимаем на кнопку входа")
+    public void clickThirdEnterButton() {
+        click(thirdEnterButton);
     }
 
     public void waitForPageLoaded() {

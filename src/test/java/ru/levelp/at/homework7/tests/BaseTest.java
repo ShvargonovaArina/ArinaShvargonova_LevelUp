@@ -1,33 +1,35 @@
-package ru.levelp.at.homework4.base;
+package ru.levelp.at.homework7.tests;
 
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.levelp.at.homework7.listener.AllureAttachmentReport;
+import ru.levelp.at.homework7.listener.TestContext;
 
+@ExtendWith({AllureAttachmentReport.class})
 public abstract class BaseTest {
-    protected Properties properties;
-    protected static final String recipientMail = "my.first.test.account@yandex.ru";
-    protected static final String personalMail = "my.first.test.account@mail.ru";
-    protected static final String testAccount = "Test Account";
-    protected static final String subjectLetter = "Subject";
-    protected static final String personalSubjectLetter = "Тест";
-    protected static final String bodyLetter = "Body";
+    public Properties properties;
     protected WebDriver driver;
     protected WebDriverWait wait;
 
     @BeforeEach
-    public void setUp() {
-        driver = new ChromeDriver();
+    public void setUp() throws IOException {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         driver.manage().window().maximize();
+        TestContext.getInstance().addObject("driver", driver);
         properties = new Properties();
         try {
-            properties.load(this.getClass().getResourceAsStream("/ru/levelp/at/homework4/users.properties"));
+            properties.load(this.getClass().getClassLoader().getResourceAsStream("users.properties"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -36,5 +38,6 @@ public abstract class BaseTest {
     @AfterEach
     public void tearDown() {
         driver.quit();
+        TestContext.clear();
     }
 }

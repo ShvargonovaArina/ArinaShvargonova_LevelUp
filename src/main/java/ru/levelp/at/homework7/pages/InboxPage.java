@@ -1,10 +1,10 @@
-package ru.levelp.at.homework4.pages;
+package ru.levelp.at.homework7.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import ru.levelp.at.homework4.inheritance.BasePage;
 
 public class InboxPage extends BasePage {
 

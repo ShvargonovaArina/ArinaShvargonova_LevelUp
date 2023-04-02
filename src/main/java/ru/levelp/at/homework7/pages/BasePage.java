@@ -1,4 +1,4 @@
-package ru.levelp.at.homework4.inheritance;
+package ru.levelp.at.homework7.pages;
 
 import java.time.Duration;
 import org.openqa.selenium.WebDriver;

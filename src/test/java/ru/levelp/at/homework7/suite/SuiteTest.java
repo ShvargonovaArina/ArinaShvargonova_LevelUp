@@ -1,4 +1,4 @@
-package ru.levelp.at.homework4.suite;
+package ru.levelp.at.homework7.suite;
 
 import org.junit.platform.suite.api.IncludeTags;
 import org.junit.platform.suite.api.SelectPackages;
