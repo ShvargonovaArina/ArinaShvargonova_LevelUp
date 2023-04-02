@@ -1,6 +1,9 @@
 package ru.levelp.at.homework7.tests;
 
 import java.io.IOException;
+
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -8,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import ru.levelp.at.homework7.steps.Steps;
 import ru.levelp.at.homework7.suite.TagName;
 
+@Feature("Тестовая папка")
 @DisplayName("Второй тест")
 public class SecondTest extends BaseTest {
 
@@ -22,6 +26,8 @@ public class SecondTest extends BaseTest {
 
     @Test
     @Tag(TagName.SUITE_TAG_NAME)
+    @Story("Создание письма")
+    @Story("Отправка письма")
     @DisplayName("Фильтрация получаемых писем по теме")
     void filteringEmailsSentToYourself() {
         var login = properties.getProperty("login");
